@@ -3,6 +3,7 @@ package com.shop.shop_clothes.entity;
 //without using lombok
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "products")
@@ -12,9 +13,18 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Name must not be blank")
     private String name;
+
+    @NotBlank(message = "Description must not be blank")
     private String description;
+
+    @NotNull(message = "Price is required")
+    @Positive(message = "Price must be positive")
     private Double price;
+
+    @NotNull(message = "Stock is required")
+    @Min(value = 0, message = "Stock must be >= 0")
     private Integer stock;
 
 
